@@ -1,6 +1,15 @@
 // 自定义打包入口和出口
 const path = require('path');
 
+// 1. 配置 html-webpack-plugin 插件
+var HtmlPlugin = require('html-plugin-plugin')
+
+// 2. 创建 HTML 插件实例对象
+var htmlPlugin = new HtmlPlugin({
+    template: './src/index.html', // 指定源文件路径
+    filename: './index.html', // 指定生成的文件存放路径
+})
+
 module.exports = {
     // mode 用来指定构建模式,可选值有development(开发模式) 和 production(上线模式)
     mode:'development',
@@ -18,9 +27,8 @@ module.exports = {
         compress: true,
         port: 9000,
     },
+
+    // 3.通过plugins 节点,是 htmlplugin 插件生效
+    plugins: [htmlPlugin],
 } 
 
-// "scripts":{
-//     // 节点下的脚本,可以通过npm run 执行,例如npm run dev
-//     "dev":"webpack"
-// }

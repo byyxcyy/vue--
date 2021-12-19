@@ -91,5 +91,47 @@ module.exports = {
 ```
 
 + **启动命令为: yarn run dev 或者 npm run dev**
-### 定制index.html的内容
-+ yarn add html-webpack-plugin -D
+
++ **浏览器输入: http://localhost:9000/src/  就可以看到效果了**
+### 定制index.html的内容.
++ 它的作用就是将sec的html页面放到根目录里面去,这样每次进去http://localhost:9000就会显示内容了,而不会显示文件夹目录
++ 安装插件: yarn add html-webpack-plugin -D
+
++ 配置 html-webpack-plugin 插件, 配置的是webpack.config.js文件
+
+```js
+// 自定义打包入口和出口
+const path = require('path');
+
+// 1. 配置 html-webpack-plugin 插件
+var HtmlPlugin = require('html-plugin-plugin')
+
+// 2. 创建 HTML 插件实例对象
+var htmlPlugin = new HtmlPlugin({
+    template: './src/index.html', // 指定源文件路径
+    filename: './index.html', // 指定生成的文件存放路径
+})
+
+module.exports = {
+    // mode 用来指定构建模式,可选值有development(开发模式) 和 production(上线模式)
+    mode:'development',
+    entry: path.join(__dirname,'./src/index.js'), // 打包入口
+    output:{
+        path: path.join(__dirname,'./dist'), // 打包出口文件夹
+        filename:'main.js' // 出口文件名字
+    },
+
+    // 定义http服务器端口
+    devServer: {
+        static: {
+            directory: path.join(__dirname, ''),
+        },
+        compress: true,
+        port: 9000,
+    },
+
+    // 3.通过plugins 节点,是 htmlplugin 插件生效
+    plugins: [htmlPlugin],
+} 
+
+```
