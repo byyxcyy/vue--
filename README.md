@@ -31,22 +31,23 @@ module.exports ={
 + 第四: 由于使用了webpack工具打包,打包的文件在dist目录下,所以在html引入js文件是引入webpack的构建过的js文件.引入自己写的源代码html引用还是会报错.
 
 ### 插件自打包, 实时更新在源代码更改项.
-+ **yarn add webpack-dev-server@3.11.2 -D**
++ **下载插件: yarn add webpack-dev-server -D**
 + 安装插件之后,修改package.json -> scripts 中的dev命令如下:
 ```json
 "scripts":{
   "dev:"webpack server"
   ```
 }
-+ 再次运行yarn run dev命令,重新打包, 这时就会实时打包了,不要每次手动大白,因为webpack-dev-server会启用一个实时打包的http服务器.
-+ **注意,安装这个插件之后需要在http协议下观看效果,否则是看不到实时更改的效果的.详细在cmd终端中前几行会有相关的提示.
++ 再次运行yarn run dev命令,重新打包, 这时就会实时打包了,不需要每次手动大包,因为webpack-dev-server会启用一个实时打包的http服务器.
++ **注意,安装这个插件之后需要在http协议下观看效果,file文件模式是看不到实时更改的效果的.详细在cmd终端中前几行会有相关的提示.
 所以在html页面引入的js也要改变,引入内存中的main.js
  <a href="https://webpack.docschina.org/configuration/dev-server/">出错的话,点击这里去官网查找方法</a> 
  或者看我这里代码结构:**
 <br>
 <br>
 + 新版webpack-dev-server使用方法:
-+ **webpack-config.js改变之后**
++ webpack-config.js改变之后
+
 ```js
 // 自定义打包入口和出口
 const path = require('path');
@@ -70,6 +71,8 @@ module.exports = {
     },
 } 
 ```
+<br>
+
 + **package.json文件更改地方**
 ```json
 "scripts": {
