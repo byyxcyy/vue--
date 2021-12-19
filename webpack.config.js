@@ -2,7 +2,7 @@
 const path = require('path');
 
 // 1. 配置 html-webpack-plugin 插件
-var HtmlPlugin = require('html-plugin-plugin')
+var HtmlPlugin = require('html-webpack-plugin')
 
 // 2. 创建 HTML 插件实例对象
 var htmlPlugin = new HtmlPlugin({
@@ -19,13 +19,15 @@ module.exports = {
         filename:'main.js' // 出口文件名字
     },
 
-    // 定义http服务器端口
+    // devServer节点,定义http服务器端口及其他关于浏览器的选项
     devServer: {
         static: {
             directory: path.join(__dirname, ''),
         },
         compress: true,
-        port: 9000,
+        open: true, // 打包完成后,自动打开浏览器
+        port: 9000, // 更改端口, 在http协议中,如果端口号是80,浏览器地址上的端口号则省略.
+        host: '127.0.0.1', // 打包过后的主机地址,127.0.0.1也是主机的回环地址
     },
 
     // 3.通过plugins 节点,是 htmlplugin 插件生效

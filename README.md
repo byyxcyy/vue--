@@ -94,7 +94,7 @@ module.exports = {
 
 + **浏览器输入: http://localhost:9000/src/  就可以看到效果了**
 ### 定制index.html的内容.
-+ 它的作用就是将sec的html页面放到根目录里面去,这样每次进去http://localhost:9000就会显示内容了,而不会显示文件夹目录
++ 它的作用就是将sec的html页面放到根目录里面去,这样每次进去http://localhost:9000就会显示内容了,而不会显示文件夹目录, 同样,物理磁盘上是没有这个文件的,文件存放在内存中. 
 + 安装插件: yarn add html-webpack-plugin -D
 
 + 配置 html-webpack-plugin 插件, 配置的是webpack.config.js文件
@@ -104,7 +104,7 @@ module.exports = {
 const path = require('path');
 
 // 1. 配置 html-webpack-plugin 插件
-var HtmlPlugin = require('html-plugin-plugin')
+var HtmlPlugin = require('html-webpack-plugin')
 
 // 2. 创建 HTML 插件实例对象
 var htmlPlugin = new HtmlPlugin({
@@ -121,17 +121,32 @@ module.exports = {
         filename:'main.js' // 出口文件名字
     },
 
-    // 定义http服务器端口
+   // devServer节点,定义http服务器端口及其他关于浏览器的选项
     devServer: {
         static: {
             directory: path.join(__dirname, ''),
         },
         compress: true,
-        port: 9000,
-    },
+        open: true, // 打包完成后,自动打开浏览器
+        port: 9000, // 更改端口, 在http协议中,如果端口号是80,浏览器地址上的端口号则省略.
+        host: '127.0.0.1', // 打包过后的主机地址,127.0.0.1也是主机的回环地址
+    }, 
 
-    // 3.通过plugins 节点,是 htmlplugin 插件生效
+     // 3.通过plugins 节点,是 htmlplugin 插件生效
     plugins: [htmlPlugin],
 } 
 
+```
++ 重新运行 yarn run dev 命令即可.
++ 注意, 即使在src中的html中取消main.js的引用也不会出错,所以当这两个插件安装完成后应该按照原来的配置去引用文件,这样当结束开发,才不会因为忘记改回原来的引用而导致的错误!
+
++ **当然,如果手动配置插件嫌弃繁琐, 可以使用vue-cli,快速生成项目,它自带webpack工具,且已经配置好了. 这个目的是要明白其中的过程**
+
+```mermaid
+graph LR
+A[方形] -->B(圆角)
+    B --> C{条件a}
+    C -->|a=1| D[结果1]
+    C -->|a=2| E[结果2]
+    F[横向流程图]
 ```
