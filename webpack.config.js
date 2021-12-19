@@ -8,7 +8,16 @@ module.exports = {
     output:{
         path: path.join(__dirname,'./dist'), // 打包出口文件夹
         filename:'main.js' // 出口文件名字
-    }
+    },
+
+    // 定义http服务器端口
+    devServer: {
+        static: {
+            directory: path.join(__dirname, ''),
+        },
+        compress: true,
+        port: 9000,
+    },
 } 
 
 // "scripts":{

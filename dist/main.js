@@ -26,7 +26,7 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\n// jquery入口函数\r\njquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {\r\n    // 实现奇数行变色,odd为奇数, even为偶数\r\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('li:odd').css('background-color','#008c8c');\r\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('li:even').css('background-color','pink');\r\n})\n\n//# sourceURL=webpack://study-vue/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\n// jquery入口函数\r\njquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {\r\n    // 实现奇数行变色,odd为奇数, even为偶数\r\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('li:odd').css('background-color','#008c8c');\r\n    jquery__WEBPACK_IMPORTED_MODULE_0___default()('li:even').css('background-color','#008c8c');\r\n})\n\n//# sourceURL=webpack://study-vue/./src/index.js?");
 
 /***/ })
 
