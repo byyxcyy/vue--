@@ -32,5 +32,15 @@ module.exports = {
 
     // 3.通过plugins 节点,是 htmlplugin 插件生效
     plugins: [htmlPlugin],
+
+    module:{
+        // loader加载器
+        rules: [
+            {test: /\.css$/, use:['style-loader', 'css-loader']}, // 文件后缀匹配规则
+        ]
+        // + 其中test表示匹配的文件类型, use表示对应要调用loader加载器
+        // use数组中指定的loader顺序是固定的
+        // 多个loader的调用顺序是: 从后往前调用
+    }
 } 
 

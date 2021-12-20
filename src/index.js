@@ -1,3 +1,5 @@
+// 导入样式
+import './index.css'
 
 import $ from 'jquery'
 // jquery入口函数

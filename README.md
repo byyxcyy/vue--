@@ -138,15 +138,37 @@ module.exports = {
 
 ```
 + 重新运行 yarn run dev 命令即可.
-+ 注意, 即使在src中的html中取消main.js的引用也不会出错,所以当这两个插件安装完成后应该按照原来的配置去引用文件,这样当结束开发,才不会因为忘记改回原来的引用而导致的错误!
 
 + **当然,如果手动配置插件嫌弃繁琐, 可以使用vue-cli,快速生成项目,它自带webpack工具,且已经配置好了. 这个目的是要明白其中的过程**
 
+<br>
+
++ webpack中的loader加载器
+
 ```mermaid
 graph LR
-A[方形] -->B(圆角)
-    B --> C{条件a}
-    C -->|a=1| D[结果1]
-    C -->|a=2| E[结果2]
-    F[横向流程图]
+A[将要被webpack打包处理的文件模块] -->B{是否为js模块}
+    B --> C(是否包含高级js语法)
+    B --> D(是否配置了对应的loader)
+    C --> E(是否配置了babel)
+    C --> F[webpack进行处理]
+    E --> G[调用loader处理]
+    E --> H(报错)
+    D --> I(调用loader处理)
+    D --> J(报错)
+    F[webpack中的loader]
+```
+
++ 下载loader加载器插件: yarn add style-loader css-loader -D
++ 在webpack.config.js文件中的module -> rules 数组中添加loader, 规则如下:
+```js
+module:{
+        // loader加载器
+        rules: [
+            {test: /\.css$/, use:['style-loader', 'css-loader']}, // 文件后缀匹配规则
+        ]
+        // + 其中test表示匹配的文件类型, use表示对应要调用loader加载器
+        // use数组中指定的loader顺序是固定的
+        // 多个loader的调用顺序是: 从后往前调用
+    }
 ```
