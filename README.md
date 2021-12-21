@@ -172,3 +172,21 @@ module:{
         // 多个loader的调用顺序是: 从后往前调用
     }
 ```
+
++ 处理 less 文件
++ 下载插件: yarn add less less-loader D
++ 配置匹配规则 module -> rules
+
+```js
+    // 处理less
+    {test: /\.less$/, use:['style-loader', 'css-loader' ,'less-loader']},
+```
+
++ 处理 样式表中的url路径相关的文件
++ 下载插件: yarn add url-loader file-loader --dev
++ 配置匹配规则 module -> rules
+
+```js
+    // 处理图片路径
+    {test: /\.jpg|png|gif$/, use:'url-loader?limit=22229'}
+```

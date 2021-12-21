@@ -36,7 +36,12 @@ module.exports = {
     module:{
         // loader加载器
         rules: [
+            // 处理css
             {test: /\.css$/, use:['style-loader', 'css-loader']}, // 文件后缀匹配规则
+            // 处理less
+            {test: /\.less$/, use:['style-loader', 'css-loader' ,'less-loader']}, 
+            // 处理图片路径
+            {test: /\.jpg|png|gif|webp$/, use:'url-loader?limit=22229'}
         ]
         // + 其中test表示匹配的文件类型, use表示对应要调用loader加载器
         // use数组中指定的loader顺序是固定的
