@@ -265,10 +265,66 @@ output:{
 + 在dist目录下增加image文件夹
 ```js
 // 处理图片路径
-{test: /\.jpg|png|gif|webp$/, use:{
-    loader:'url-loader',
-    limit: 22228,
-    // 明确自动把打包生成的图片文件,存到dist目录下的image文件夹下
-    outputPath: 'images'
-}},
+{test: /\.jpg|png|gif|webp$/, 
+    use:{
+        loader:'url-loader',
+        options:{
+            limit: 22228,
+            // 明确自动把打包生成的图片文件,存到dist目录下的image文件夹下
+            outputPath: 'images'
+        }
+    }
+},
+
+// 优化写法
+{test: /\.jpg|png|gif|webp$/, use:'url-loader?limit=22228&outputPath=images'},
+// limit为指定文件大小,≤22228字节则转换成base64格式的图片
+// outputPath则是指定生成文件夹路径
+```
+
+### 每次build发布,自动删除之前dist文件夹
++ 安装插件: yarn add clean-webpack-plugin -D
++ 导入插件,得到插件的构造函数之后,创建插件的实例对象
+
+```js
+// 每次build发布,自动删除之前dist文件夹
+var {CleanWebpackPlugin} = require('clean-webpack-plugin');
+var clean = new CleanWebpackPlugin();
+
+
+// 3.通过plugins 节点,是 htmlplugin 插件生效
+plugins: [htmlPlugin, clean],  // 挂载clean, 新增项
+// 挂载clean 每次build发布,自动删除之前dist文件夹
+
+```
+
+### 运行时报错行号,与源代码保持一致
+
+```js
+// eval-source-map'仅在开发模式下使用,不建议生产模式
+// 此项生成的 source map 能够保证'运行时报错的行数, 与源代码的行数保持一致.
+devtool:'nosources-source-map',
+
+// 因源代码泄露原因,如果忘记关闭devtool:'eval-source-map',打包后则默认是不会泄露出源代码的,
+// 在实际开发中, 建议把devtool的选项设置为 nosources-source-map,或者关闭sourcemap
+
+// 开启sourcemap, 打包后看得到源代码
+devtool:'source-map; 
+
+// 打包后看的到报错行数,但是源代码是压缩过的
+devtool:'eval-source-map'
+
+// 打包后打包后看的到报错行数,但是看不到压缩的代码和源代码
+devtool:'nosources-source-map',
+```
+
+### 配置@符号为文件夹根目录
+```js
+// 配置@, 目录从外往里找, 而不是从里往外找
+// 告诉 webpack ,程序员写的代码中, @符号表示src 这一层目录
+resolve: {
+    alias: {
+      '@': path.join(__dirname, './src/')
+    }
+}
 ```

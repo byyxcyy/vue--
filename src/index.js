@@ -1,8 +1,8 @@
 import $ from 'jquery'
 
 // 导入样式
-import './index.css'
-import './css/index.less'
+import '@/index.css'
+import '@/css/index.less'
 
 // 导入图片
 import is from '../img/章鱼.webp'
@@ -17,7 +17,7 @@ $(function () {
 })
 
 function info(tar) {
-    tar.info = '我曹'
+    tar.info = '鸭儿了嘿'
 }
 
 @info
