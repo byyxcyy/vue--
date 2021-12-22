@@ -143,7 +143,7 @@ module.exports = {
 
 <br>
 
-+ webpack中的loader加载器
+### webpack中的loader加载器
 
 ```mermaid
 graph LR
@@ -173,7 +173,7 @@ module:{
     }
 ```
 
-+ 处理 less 文件
+### 处理 less 文件
 + 下载插件: yarn add less less-loader D
 + 配置匹配规则 module -> rules
 
@@ -182,11 +182,58 @@ module:{
     {test: /\.less$/, use:['style-loader', 'css-loader' ,'less-loader']},
 ```
 
-+ 处理 样式表中的url路径相关的文件
+### 处理 样式表中的url路径相关的文件
 + 下载插件: yarn add url-loader file-loader --dev
 + 配置匹配规则 module -> rules
 
 ```js
     // 处理图片路径
     {test: /\.jpg|png|gif$/, use:'url-loader?limit=22229'}
+    // limit用来指定图片大小,单位是字节
+    // 只有≤limit大小的图片才会被转换成base64格式的图片
+```
+
+### babel-loader处理 @装饰器法语
+
++ 原文
+```js
+// webpack无法处理的语法,需要借助babel-loader进行打包处理
+// jquery入口函数
+$(function () {
+    // 实现奇数行变色,odd为奇数, even为偶数
+    $('li:odd').css('background-color','#008c8c');
+    $('li:even').css('background-color','#cce');
+})
+
+function info(tar) {
+    tar.info = '我曹'
+}
+
+@info
+class Press{}
+
+console.log(Press.info);
+
+```
+
++ 1.安装插件: yarn add babel-loader @babel/core @babel/plugin-proposal-decorators -D 
+  
++ 2.在webpack.config.js 中的module -> rules 数组中,添加如下规则:
+  
+```js
+    // 支持@装饰器语法
+    // 注意,必须指定exclude排除项,因为 Node_modules 目录下的第三方包不需要被打包
+    {test: /\.js$/, use:'babel-loader', exclude: /node_modules/},
+``` 
+
++ 3.配置babel-loader 文件 
+  + 在根目录新建babel.config.js文件, 定义babel规则如下:
+
+```js
+module.exports = {
+    // 声明 babel 可用插件, 如下插件是转换装饰器语法,没有它babel是无法转换的
+    plugins:[
+        ['@babel/plugin-proposal-decorators', {legacy: true}],
+    ]
+}
 ```

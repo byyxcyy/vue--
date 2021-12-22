@@ -41,7 +41,11 @@ module.exports = {
             // 处理less
             {test: /\.less$/, use:['style-loader', 'css-loader' ,'less-loader']}, 
             // 处理图片路径
-            {test: /\.jpg|png|gif|webp$/, use:'url-loader?limit=22229'}
+            {test: /\.jpg|png|gif|webp$/, use:'url-loader'},
+
+            // 支持@装饰器语法
+            // 注意,必须指定exclude排除项,因为 Node_modules 目录下的第三方包不需要被打包
+            {test: /\.js$/, use:'babel-loader', exclude: /node_modules/},
         ]
         // + 其中test表示匹配的文件类型, use表示对应要调用loader加载器
         // use数组中指定的loader顺序是固定的
