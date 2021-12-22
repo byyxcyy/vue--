@@ -237,3 +237,38 @@ module.exports = {
     ]
 }
 ```
+
+### 打包发布
++ 由于webpack工具生成的文件在内存中,所以需要存到物理磁盘
++ 在package.json文件的scripts节点下,新增build命令,如下:
+
+```json
+    "scripts": {
+    "dev": "webpack server",
+    "build": "webpack --mode production" // 新增项
+  },
+```
++ --model 是一个常数项,用来指定webpack的运行模式. production表示生产环境,会对打包生成的文件进行代码压缩和性能优化.
++ 注意: --model指定的参数项,会覆盖webpack.config.js中的model选项
++ 然后 yarn run build 或 npm run build 发布
+
+### 优化生成的dist目录结构
+
++ 在dist目录下增加js文件夹
+```js
+output:{
+      path: path.join(__dirname,'./dist'), // 打包出口根目录文件夹名字
+      filename:'/js/main.js' // 出口到dist/js文件夹下
+  },
+```
+
++ 在dist目录下增加image文件夹
+```js
+// 处理图片路径
+{test: /\.jpg|png|gif|webp$/, use:{
+    loader:'url-loader',
+    limit: 22228,
+    // 明确自动把打包生成的图片文件,存到dist目录下的image文件夹下
+    outputPath: 'images'
+}},
+```
