@@ -7,19 +7,26 @@
     <title>vue 学习</title>
 </head>
 <body>
-    <ul class="yangshi">
-        <li>第1个</li>
-        <li>第2个</li>
-        <li>第3个</li>
-        <li>第4个</li>
-        <li>第5个</li>
-        <li>第6个</li>
-        <li>第7个</li>
-        <li>第8个</li>
-        <li>第9个</li>
-    </ul>
-    <img class="imges" alt="无法显示,可能需要翻墙">
-    <!-- 这里使用了webpack工具,所以引入是引入webpack的构建过的js,如果使用了server插件则需要引入内存的main.js文件 -->
-    <!-- <script src="../dist/main.js"></script> -->
+
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+        <p v-text="username"></p>
+        <p>{{gender}}女</p>
+        <p v-html="biaoqian"></p>
+    </div>
+    <script>
+        // new 一个实例
+        const vm = new Vue({
+            // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
+            el: '#app',
+            // data 对象就是要渲染到页面上的数据
+            data:{
+                username:'芽儿了嘿!',
+                gender:'无情',
+                biaoqian:'<span style="font-size:60px; color:#008c8c">yaer</span>'
+            }
+        });
+    </script>
+
 </body>
 </html>

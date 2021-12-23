@@ -328,3 +328,100 @@ resolve: {
     }
 }
 ```
+
+## vue指令
+
+### 1. 内容渲染指令
+ + 内容渲染指令,用来辅助开发者渲染DOM元素的文本内容.常用的内容渲染指令有如下三个:
+   + **V-text**
+   + **{{ }} 插值表达式**
+   + **v-html**
+     1. #### v-text 纯文本
+     ```html
+      <!-- 把 username 对应的值, 渲染到第一个标签中 -->
+      <p v-text="username"></p>
+
+      <!-- 把 gender 对应的值, 渲染到第二个p标签中 -->
+      <!-- 注意: 第二个p标签中, 默认的文本"性别"会被gender的值覆盖掉 -->
+      <p v-text="gender">性别</p>
+     ```
+
+     + 栗子:
+      ```html
+      <script src="../node_modules/vue/dist/vue.js"></script>
+      <div id="app">
+          <p v-text="username"></p>
+          <p v-text="gender">女</p>
+      </div>
+      <script>
+          // new 一个实例
+          const vm = new Vue({
+              // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
+              el: '#app',
+              // data 对象就是要渲染到页面上的数据
+              data:{
+                  username:'芽儿了嘿!',
+                  gender:'无情',
+              }
+          });
+      </script>
+      ```
+
+    1. #### {{ }} 插值表达式 纯文本
+          + 语法:
+          ```html
+          <script src="../node_modules/vue/dist/vue.js"></script>
+          <div id="app">
+              <p v-text="username"></p>
+              <p>{{gender}}女</p>
+          </div>
+          <script>
+              // new 一个实例
+              const vm = new Vue({
+                  // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
+                  el: '#app',
+                  // data 对象就是要渲染到页面上的数据
+                  data:{
+                      username:'芽儿了嘿!',
+                      gender:'无情',
+                  }
+              });
+          </script>
+          ```
+    2. #### v-html 带标签的渲染
+      ```html
+          ```html
+          <script src="../node_modules/vue/dist/vue.js"></script>
+          <div id="app">
+              <p v-text="username"></p>
+              <p>{{gender}}女</p>
+              <p v-html="biaoqian"></p>
+          </div>
+          <script>
+              // new 一个实例
+              const vm = new Vue({
+                  // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
+                  el: '#app',
+                  // data 对象就是要渲染到页面上的数据
+                  data:{
+                      username:'芽儿了嘿!',
+                      gender:'无情',
+                      biaoqian:'<span style="font-size:30px"></span>'
+                  }
+              });
+          </script>
+          ```
+      ```
+
+      1. 
+
+### 2 属性绑定指令
+    
+### 事件绑定指令
+
+### 双向绑定指令
+
+### 条件渲染指令
+
+
+### 列表渲染指令
