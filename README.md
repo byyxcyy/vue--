@@ -330,13 +330,18 @@ resolve: {
 ```
 
 ## vue指令
+  1. 差值表达式只能用在内容节点,不能用在属性节点. 但是支持表达式运算
+    - {{number + 1}}
+    - {{ok ? 'yes' : 'no'}}
+    - {{message.sp;it('').reverse().join('')}}
+    - 在属性绑定也支持表达式运算
 
 ### 1. 内容渲染指令
  + 内容渲染指令,用来辅助开发者渲染DOM元素的文本内容.常用的内容渲染指令有如下三个:
-   + **V-text**
-   + **{{ }} 插值表达式**
-   + **v-html**
-     1. #### v-text 纯文本
+   + **V-text:** 会覆盖元素内部原有内容
+   + **{{ }} 插值表达式** 只是内容占位符,不会覆盖原有内容
+   + **v-html:** 可以把带有标签的字符串,渲染成真正的html内容
+    1. #### v-text 纯文本
      ```html
       <!-- 把 username 对应的值, 渲染到第一个标签中 -->
       <p v-text="username"></p>
@@ -367,7 +372,7 @@ resolve: {
       </script>
       ```
 
-    1. #### {{ }} 插值表达式 纯文本
+    2. #### {{ }} 插值表达式 纯文本
           + 语法:
           ```html
           <script src="../node_modules/vue/dist/vue.js"></script>
@@ -413,15 +418,120 @@ resolve: {
           ```
       ```
 
-      1. 
 
-### 2 属性绑定指令
-    
-### 事件绑定指令
+### 2. 属性绑定指令
+  - **属性绑定,也支持表达式运算**
+  - **v-bind**: 如果需要为元素的 属性 动态绑定属性值,则需要用到v-bind,html如下:
+    ```html
+    <!-- vue里 属性绑定指令 可以简写成 : -->
+    <input type="text" v-bind:placeholder='tips'>
 
-### 双向绑定指令
+    ```
+  - vue js代码
+    ```js
+        // new 一个实例
+    const vm = new Vue({
+        // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
+        el: '#app',
+        // data 对象就是要渲染到页面上的数据
+        data: {
+            tips:'请输入用户名:', // tips为提示信息
+        }
+    });
+    ```
 
-### 条件渲染指令
+### 3. 事件绑定指令
+  - **v-on:** 可以简写@click, 代码如下:
+  ```html
+    <samp class="xianshi" v-text='number'></samp>
+    <button @click='add'>+</button>
+  ```
+  - vue js
+  ```js
+    // new 一个实例
+    const vm = new Vue({
+
+    // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
+    el: '#app',
+
+    // data 对象就是要渲染到页面上的数据
+    data: {
+        number: 0,
+    },
+
+    // 事件处理函数
+    methods: {
+        add: function(){
+            this.number += 1
+        }
+    }
+}); 
+  ```
+
+    + 原生DOM对象有onclick, oninput, onkeyup(点击,输入,键盘)等原生事件, 替换为vue的是件绑定形式后.分别为: v-on:click, v-on:input, v-on:keyup
+     
+    + #### 事件修饰符
+      + **.prevent:** 阻止默认行为(例如:阻止a标签的链接跳转,阻止表单提交)
+      + **.stop:** 阻止事件冒泡
+      + **.capture:** 以捕获模式触发当前的事件处理函数
+      + **.once:** 绑定事件只触发一次
+      + **.self** 只有在event.target是当前元素自身是触发事件处理函数.
+      +  栗子: 
+      ```html
+      <!-- 绑定事件只触发一次 -->
+      <button @click.once='add(1, $event)'>+</button>
+     ``` 
+
+      + **按键修饰符**
+        + 在监听键盘事件时,我们经常需要判断详细的按键.此时,可以为键盘相关的事件添加按键修饰符, 例如:
+```html
+    <!-- 只有在 'kry' 是 'Enter' 时调用 'vm.submit()' -->
+    <input @keyup.esc="claerInput">
+
+    <!-- 只有在 'key' 是 'Esc' 时调用 'vm-clearInput()'  -->
+    <input @keyup.esc="clearInput">
+``` 
+
+### 4. 双向绑定指令
+  + **v-model:** 双向数据绑定指令 
+  + 修饰符
+    + **.bumber:** 自动将用户输入的值转换为数值类型 
+    + **.trim:** 自动过滤用户输入的首尾空白符 
+    + **.lazy:** 在输入时不会更新, 失去焦点时才会同步到vm
+     
 
 
-### 列表渲染指令
+### 5. 条件渲染指令
+  + 条件渲染指令,用来辅助开发DOM的显示与隐藏,条件渲染指令有如下两个:
+  + **v-if:** 通过动态删除,来隐藏
+  + **v-show:** 是通过样式display来隐藏
+    ```html
+        <div id="app">
+            <div>
+                <p v-if='wof'>请求成功 --- 被 v-if 控制</p>
+                <p v-show='wof'>请求成功 --- 被 v-show 控制</p>
+                <button @click='qie'>点击</button>
+            </div>
+        </div>
+
+        <script>
+            var ve = new Vue({
+                el: '#app',
+
+                data: {
+                    wof: true,
+                },
+
+                methods: {
+                    qie(){
+                        this.wof = !this.wof;
+                    }
+                }
+            })
+        </script>
+    ```
+
+### 6. 列表渲染指令
+  + **v-for:** 用来辅助开发者基于一个数组来循环渲染一个列表结构. v-for指令需要使用item in items 形式的特殊语法,其中:
+    + items 是待循环的数组,或者列表
+    + item 是被循环的每一项

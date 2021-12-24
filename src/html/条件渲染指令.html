@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染指令</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
+
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <div>
+            <p v-if='wof'>请求成功 --- 被 v-if 控制</p>
+            <p v-show='wof'>请求成功 --- 被 v-show 控制</p>
+            <button @click='qie'>点击</button>
+        </div>
+    </div>
+
+    <script>
+        var ve = new Vue({
+            el: '#app',
+
+            data: {
+                wof: true,
+            },
+
+            methods: {
+                qie(){
+                    this.wof = !this.wof;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

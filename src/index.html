@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vue 学习</title>
+    <link rel="stylesheet" href="./css/yanghsi.css">
 </head>
+
 <body>
 
     <script src="../node_modules/vue/dist/vue.js"></script>
     <div id="app">
-        <p v-text="username"></p>
-        <p>{{gender}}女</p>
-        <p v-html="biaoqian"></p>
+        <div><p v-text="username"></p>
+            <p>{{gender}}女</p>
+            <p v-html="biaoqian"></p>
+            <!-- vue里 属性绑定指令 可以简写成 : -->
+            <input type="text" :placeholder='tips' id='shuzi'>
+            <img :src="photo" alt="" srcset="">
+            
+            <div class="jia">
+                <samp class="xianshi" v-text='number'></samp>
+                <!-- // vue 提供了内置变量$event, 用于接受原生按钮事件属性 -->
+                <button @click.once='add(1, $event)'>+</button>
+                <button @click='sub(1, $event)'>-</button>
+            </div>
+        </div>
     </div>
-    <script>
-        // new 一个实例
-        const vm = new Vue({
-            // el属性是固定写法, 表示当前vm实例要控制页面上那个区域,接受的值是一个选择器
-            el: '#app',
-            // data 对象就是要渲染到页面上的数据
-            data:{
-                username:'芽儿了嘿!',
-                gender:'无情',
-                biaoqian:'<span style="font-size:60px; color:#008c8c">yaer</span>'
-            }
-        });
-    </script>
+    <script src="./js/vue.js"></script>
 
 </body>
+
 </html>

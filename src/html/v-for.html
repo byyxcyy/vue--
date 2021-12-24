@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+    
+</head>
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+        <table table-bordered>
+            <!-- 表头 -->
+            <thead>
+                <th>索引</th>
+                <th>id</th>
+                <th>数据</th>
+            </thead>
+            
+
+            <!-- 结构 -->
+            <tbody>
+                <tr v-for='item in list'>
+                    <td>0</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                </tr>
+                <hr>
+            
+        </table>
+    </div>
+
+    <script>
+        var ve = new Vue({
+            el:'#app',
+            list:[
+                {id: 1, name: '鸭儿'},
+                {id: 2, name: '鸭儿'},
+                {id: 3, name: '鸭儿'},
+            ]
+        })
+    </script>
+</body>
+</html>

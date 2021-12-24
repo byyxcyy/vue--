@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按键访问修饰符</title>
+</head>
+
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+        <input type="text" @keyup.esc='anjian'>
+    </div>
+
+
+    <script>
+        var ve = new Vue({
+            el: '#app',
+
+            methods: {
+                anjian(){
+                    console.log('触发了esc按键');
+                    // 按esc清空
+                    e.target.value = '';  
+                }
+            }
+
+        });
+    </script>
+
+
+</body>
+
+</html>
