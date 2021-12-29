@@ -1,3 +1,12 @@
+// const dayjs = require("dayjs");
+
+// 声明全局过滤器
+Vue.filter('dateFormat', function(str) {
+    // 对时间进行格式化处理, yyyy-mm-dd hh:mm:ss
+    // dayjs.extract(customParseFormat); //此功能依赖CustomParseFormat插件
+    return dayjs(str).format('YYYY-MM-DD HH:mm:ss');
+})
+
 var ve = new Vue({
     el: "#app",
 
@@ -6,7 +15,7 @@ var ve = new Vue({
         // 用户输入的品牌名称保存起来
         brand: '',
 
-        // nextId 是下一个，可用的 id
+        // nextId 是下一个，可用的 id的值
         nextId: 4,
 
         list: [{
@@ -52,7 +61,7 @@ var ve = new Vue({
                 status: true,
                 time: new Date()
             }
-            
+
             // 2. 往 this.list 数组中 push 步骤 1 中得到的对象
             this.list.push(obj)
             // 3. 清空 this.brand；让 this.nextId 自增 +1

@@ -10,6 +10,7 @@
 </head>
 <body>
     <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/dayjs/dayjs.min.js"></script>
     <div id="app">
         <!-- 头部 -->
         <div class="card">
@@ -17,8 +18,8 @@
 
             <div class="card-body">
                 <!-- 添加品牌的表单区域 -->
-                <!-- form 表单元素有 submit 事件 -->
-                <form @submit.action="add">
+                <!-- form 表单元素有 submit 事件 .action事件修饰符会导致添加之后会被清除掉添加项dug -->
+                <form @submit.prevent="add">
                     <div class="form-row align-items-center">
                         <div class="col-auto">
                             <div class="input-group mb-2">
@@ -62,7 +63,7 @@
                             <label class="custom-control-label" :for="'customSwitch1' + index" v-else>已禁用</label>
                         </div>
                     </td>
-                    <td>{{item.time}}</td>
+                    <td>{{item.time | dateFormat}}</td>
                     <td>
                         <a href="javascript:;" @click="remove(item.id)">删除</a>
                     </td>
@@ -70,6 +71,6 @@
             </tbody>
         </table>
     </div>
-    <script src="../js/element-ui.js"></script>
+    <script src="../js/列表添加练习.js"></script>
 </body>
 </html>
