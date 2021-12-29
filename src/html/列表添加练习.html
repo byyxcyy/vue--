@@ -12,7 +12,31 @@
     <script src="../../node_modules/vue/dist/vue.js"></script>
     <div id="app">
         <!-- 头部 -->
-        <div class="card"></div>
+        <div class="card">
+            <div class="card-header">添加项</div>
+
+            <div class="card-body">
+                <!-- 添加品牌的表单区域 -->
+                <!-- form 表单元素有 submit 事件 -->
+                <form @submit.action="add">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">品牌名称</div>
+                                </div>
+                                <!-- v-model.trim="brand" 双向绑定brand并且.trim去除首尾空格 -->
+                                <input type="text" class="form-control" placeholder="请输入品牌名称" v-model.trim="brand">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-2">添加</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- 表格 -->
         <table class="table table-bordered table-striped table-hover">
@@ -25,22 +49,22 @@
             </thead>
 
             <tbody>
-                <tr v-for='(item, index) in list' :key='index' :title='item.name'>
-                    <td>{{index}}</td>
+                <tr v-for='(item, index) in list' :key="item.id" :title='item.name'>
+                    <td>{{index + 1}}</td>
                     <td>{{item.name}}</td>
                     <td>
                         <div class="custom-control custom-switch">
-                            <!-- v-model="item.status"双向绑定 -->
-                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                            v-model="item.status" :click="toggle">
+                            <!-- v-model="item.status"双向绑定  :id="'customSwitch1' + index"动态绑定id -->
+                            <input type="checkbox" class="custom-control-input" :id="'customSwitch1' + index"
+                            v-model="item.status">
                             <!-- 通过双向绑定来控制 v-if="item.status" 来显示与隐藏-->
-                            <label class="custom-control-label" for="customSwitch" v-if="item.status">已启用</label>
-                            <label class="custom-control-label" for="customSwitch" v-else="item.status">已禁用</label>
+                            <label class="custom-control-label" :for="'customSwitch1' + index" v-if="item.status">已启用</label>
+                            <label class="custom-control-label" :for="'customSwitch1' + index" v-else>已禁用</label>
                         </div>
                     </td>
                     <td>{{item.time}}</td>
                     <td>
-                        <a href="javascript:;">删除</a>
+                        <a href="javascript:;" @click="remove(item.id)">删除</a>
                     </td>
                 </tr>
             </tbody>
