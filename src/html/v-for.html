@@ -5,40 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v-for</title>
-    
+    <link rel="stylesheet" href="../css/element-ui.css">
 </head>
 <body>
     <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/element-ui/lib/index.js"></script>
+    
     <div id="app">
-        <table table-bordered>
-            <!-- 表头 -->
-            <thead>
-                <th>索引</th>
-                <th>id</th>
-                <th>数据</th>
-            </thead>
-            
-
-            <!-- 结构 -->
-            <tbody>
-                <tr v-for='item in list'>
-                    <td>0</td>
-                    <td>{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                </tr>
-                <hr>
-            
-        </table>
+        <template>
+                <table>
+                    <!-- 表头 -->
+                    <thead>
+                        <th>索引</th>
+                        <th>id</th>
+                        <th>数据</th>
+                    </thead>
+                    
+        
+                    <!-- 结构 -->
+                    <tbody>
+                        <!-- v-for指令还支持一个可选的第二个参数,即当前项的索引,语法格式为(item, index) in list -->
+                            <tr v-for='(item, index) in list' :title="item.name">
+                            <td>{{index}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.jie}}</td>
+                        </tr>
+                        <hr>
+                    
+                </table>
+        </template>
     </div>
 
     <script>
         var ve = new Vue({
             el:'#app',
-            list:[
-                {id: 1, name: '鸭儿'},
-                {id: 2, name: '鸭儿'},
-                {id: 3, name: '鸭儿'},
+            data:{
+                list:[
+                {id: 1, name: '鸭儿', jie:'嘿'},
+                {id: 2, name: '鸭儿', jie:'嘿'},
+                {id: 3, name: '鸭儿', jie:'嘿'},
             ]
+            }
         })
     </script>
 </body>
