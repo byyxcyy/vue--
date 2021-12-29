@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch侦听器</title>
+</head>
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+
+    <div id="app">
+        <input type="text" v-model='userName'>
+    </div>
+
+    <script>
+        var ve = new Vue({
+            el:'#app',
+
+            data:{
+                userName:'',
+            },
+
+            // 侦听器本质上是一个函数,要监视那个数据变化,就把数据名称作为方法名即可.
+            watch:{
+                userName(newVal, oldVal){
+                    if (newVal === '') return;
+                    console.log('新值:' + newVal, '旧值:' + oldVal);
+                    // 调用 jQuery 中的 Ajax 发起用户名是否被占用请求, 判断 newVal 是否被占用.
+                    return $.get('https://www.escook.cn/api/finduser/' + newVal, function(data){
+                        console.log(data);
+                    });
+                }
+            },
+        })
+    </script>
+</body>
+</html>

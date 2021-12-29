@@ -5,13 +5,8 @@
     box-sizing: border-box;
 }
 
-.jia {
-    margin-top:20px;
-}
-.xianshi{
-    margin: 40px;
-}
-
-button {
-    width: 60px;
+.box {
+    width: 400px;
+    height: 300px;
+    color: rgb(42, 37, 37);
 }

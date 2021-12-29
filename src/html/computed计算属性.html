@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>computed计算属性</title>
+    <link rel="stylesheet" href="../css/yanghsi.css">
+</head>
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+
+    <div id='app'>
+        <span>R(红):</span> <input type="text" v-model.number='r' title='红色输入0-255之间的数值'>
+        <br>
+        <span>G(绿):</span> <input type="text" v-model.number='g' title="绿色输入0-255之间的数值">
+        <br>
+        <span>B(蓝):</span> <input type="text" v-model.number='b' title="蓝色输入0-255之间的数值">
+        <br>
+        <span>A(透明度):</span> <input type="text" v-model.number='a' title='透明度输入0-1之间的小数'>
+
+        <br>
+        <div class="box" :style="{backgroundColor: rgba}">{{rgba}}</div>
+    </div>
+
+    <script>
+        var ve = new Vue({
+            el:'#app',
+
+            // 数据
+            data:{
+                r:0,
+                g:0,
+                b:0,
+                a:1,
+            },
+
+            // 所有计算属性,都要定义到computed属性下.在计算属性在定义的时候,要定义成'方法格式'
+            computed: {
+                rgba() {
+                    // 返回一个字符串
+                    return `rgb(${this.r}, ${this.g}, ${this.b}, ${this.a})`
+                }
+            },
+        })
+    </script>
+</body>
+</html>

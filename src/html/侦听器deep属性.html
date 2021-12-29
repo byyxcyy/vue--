@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch侦听器的deep属性</title>
+</head>
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+
+    <div id="app">
+        <input type="text" v-model='info.userName'>
+    </div>
+
+    <script>
+        var ve = new Vue({
+            el:'#app',
+
+            data:{
+                info: {
+                    userName:'admin'
+                }
+            },
+
+            // 侦听器本质上是一个函数,要监视那个数据变化,就把数据名称作为方法名即可.
+            watch:{
+                info:{
+                    // 侦听器的处理函数
+                    handler(newVal, oldVal) {
+                        console.log('新值:' + newVal, '旧值:' + oldVal);
+
+                        if(newVal === '') return;
+                        
+                        // 调用 jQuery 中的 Ajax 发起用户名是否被占用请求, 判断 newVal 是否被占用.
+                        return $.get('https://www.escook.cn/api/finduser/' + newVal, function(data){
+                            console.log(data);
+                        });
+                    },
+
+                    // 开启对象监听(深度监听), 只要对象中任何一个属性发生变化,都会触发'对象的侦听器'
+                    deep: true,
+                }
+            }
+        })
+    </script>
+</body>
+</html>
