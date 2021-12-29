@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表练习</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/brandlist.css">
+</head>
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+        <!-- 头部 -->
+        <div class="card"></div>
+
+        <!-- 表格 -->
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th>#</th>
+                <th>品牌</th>
+                <th>状态</th>
+                <th>日期</th>
+                <th>操作</th>
+            </thead>
+
+            <tbody>
+                <tr v-for='(item, index) in list' :key='index' :title='item.name'>
+                    <td>{{index}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <div class="custom-control custom-switch">
+                            <!-- v-model="item.status"双向绑定 -->
+                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                            v-model="item.status" :click="toggle">
+                            <!-- 通过双向绑定来控制 v-if="item.status" 来显示与隐藏-->
+                            <label class="custom-control-label" for="customSwitch" v-if="item.status">已启用</label>
+                            <label class="custom-control-label" for="customSwitch" v-else="item.status">已禁用</label>
+                        </div>
+                    </td>
+                    <td>{{item.time}}</td>
+                    <td>
+                        <a href="javascript:;">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../js/element-ui.js"></script>
+</body>
+</html>

@@ -5,27 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>v-for</title>
-    <link rel="stylesheet" href="../css/element-ui.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/brandlist.css">
 </head>
 <body>
     <script src="../../node_modules/vue/dist/vue.js"></script>
-    <script src="../../node_modules/element-ui/lib/index.js"></script>
     
-    <div id="app">
+    <div id="vapp">
         <template>
-                <table>
+            <!-- table-striped表格隔行变色 table-hover鼠标移上变色-->
+                <table class="table table-bordered table-hover table-striped">
                     <!-- 表头 -->
                     <thead>
                         <th>索引</th>
-                        <th>id</th>
+                        <th>名称</th>
                         <th>数据</th>
                     </thead>
                     
-        
                     <!-- 结构 -->
                     <tbody>
                         <!-- v-for指令还支持一个可选的第二个参数,即当前项的索引,语法格式为(item, index) in list -->
-                            <tr v-for='(item, index) in list' :title="item.name">
+                        <!-- 建议使用v-for指令时一定要指定key的值(既能提升性能,又能防止列表状态紊乱) -->
+                            <tr v-for='(item, index) in list' :key="item.id" :title="item.name">
                             <td>{{index}}</td>
                             <td>{{item.name}}</td>
                             <td>{{item.jie}}</td>
@@ -35,10 +36,9 @@
                 </table>
         </template>
     </div>
-
     <script>
         var ve = new Vue({
-            el:'#app',
+            el:'#vapp',
             data:{
                 list:[
                 {id: 1, name: '鸭儿', jie:'嘿'},

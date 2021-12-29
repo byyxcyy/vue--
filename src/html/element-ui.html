@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>element-ui</title>
+    <link rel="stylesheet" href="../css/element-ui.css">
+    <!-- <link rel="stylesheet" href="../css/brandlist.css"> -->
+</head>
+<body>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="../../node_modules/element-ui/lib/index.js"></script>
+    <!-- element-ui栗子 -->
+    <div id="app">
+        <template class="table table-bordered table-hover table-striped">
+            <el-table :data="list" style="width: 100%;">
+                <el-table-column prop='data' label='日期' ></el-table-column>
+                <el-table-column prop='name' label='姓名' ></el-table-column>
+                <el-table-column prop='address' label='地址' ></el-table-column>
+            </el-table>
+        </template>
+    </div>
+
+    <!-- element-ui js -->
+    <script>
+        var ve = new Vue({
+            el:'#app',
+
+            data: {
+                list:[
+                    {data: '2021-12-31', name: '张三', address:'上海市普陀区金沙江路 1518 弄'},
+                    {data: '2021-12-31', name: '李四', address:'上海市普陀区金沙江路 1518 弄'},
+                    {data: '2021-12-31', name: '王五', address:'上海市普陀区金沙江路 1518 弄'},
+                ],
+            }
+        })
+    </script>
+</body>
+</html>
