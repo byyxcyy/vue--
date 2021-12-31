@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios的基本使用</title>
+</head>
+<body>
+    <script src="../../node_modules/axios/dist/axios.js"></script>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <div v-html='this.su'></div>
+        <button @click="add">
+            发起请求
+        </button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                su: '',    
+            },
+
+            methods:{
+
+                // 如果调用某个方法的返回值是 Promise 实例, 则方法前面可以添加 await, 进行实例简化
+                // await 只能用在 async 的修饰符的方法中
+                async add(){
+                    // 解构赋值的时候, 可以使用 : 进行重命名 
+                    var { data: res } = await axios({
+                        method: 'get',
+                        url: 'http://www.liulongbin.top:3006/api/getbooks',
+                        params:{
+                            id: 1,
+                        }
+                    })
+                    this.su = res.data
+                    console.log(res);
+                }
+            },
+        })
+
+    </script>
+</body>
+</html>

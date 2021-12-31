@@ -26,7 +26,7 @@ var ve = new Vue({
             },
             {
                 name: '比亚迪',
-                status: '=false',
+                status: 'false',
                 time: new Date().toISOString(),
                 id: 2
             },
@@ -51,7 +51,7 @@ var ve = new Vue({
         // 阻止表单的默认提交行为之后，触发 add 方法
         add() {
             // 如果判断到 brand 的值为空字符串，则 return 报错
-            if (this.brand === '') return alert('必须填写品牌名称！')
+            if (this.brand === '') return alert('必须填写名称！')
 
             // 如果没有被 return 出去，应该执行添加的逻辑
             // 1. 先把要添加的品牌对象，整理出来

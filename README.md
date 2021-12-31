@@ -575,3 +575,51 @@ resolve: {
 ## axios
   + 安装 yarn add axios -S
   + 发音(艾克c奥斯), 一个专注于网络数据请求的库
+  + 基本语法如下:
+  ```js
+    // http://www.liulongbin.top:3006/api/getbooks
+    // 1. 调用 axios 方法得到的返回值是 Promise 对象
+    var fanhui = axios({
+        // 请求方式
+        method: "GET",
+        // 请求地址
+        url: 'http://www.liulongbin.top:3006/api/getbooks',
+        
+        // URL中的查询参数, get传参用params
+        params: {
+            id:1 
+        },
+
+        // 请求体参数, post传参用data
+        data: {},
+    })
+
+    // axios 在请求到数据之后, 在真正的数据之外,套了一层壳.
+    fanhui.then(function(books) {
+        console.log(books.data);
+    })
+  ```
+  + 详见**axios基本使用.html**栗子.
+
+
+## vue-cli 脚手架
+  + 全局安装 yarn add -g vue-cli
+  + 基于脚手架快速生成项目:
+    + 1. vue-create 项目名字
+    + 2. 选择最后一个选项, 自定义项目搭建
+    + 3. ![vue-cli脚手架搭建.png](vue-cli脚手架搭建.png)
+    + 4. 选择vue版本, 看自己
+    + 5. 选择css预处理器, 选择less, 或者选择自己会用的
+    + 6. 第三方的配置文件,是放在独立的文件中,还是放到默认的配置文件中.选第一项,独立文件即可
+    + 7. 是否将上面选择的选项保存为预设, 以便下一次续用, 选择y
+    + 8. 预设名字
+    + 9. 选择 包 管理器
+    + 10. 详见 **vue-doem** 项目
+
+
+  ### vue项目中 src 目录的结成
+    1. assets 文件夹: 存放项目中使用到的静态资源文件, 例如: css样式表, 图片等资源.
+    2. components 文件夹: 程序员封装的, 可复用的组件, 都要放到这个文件夹下.
+    3. main.js 是项目的入口文件, 整个项目的运行, 要先执行main.js
+    4. app.vue 是heml的UI结构, 根组件
+    5. ![vue运行流程.png](vue运行流程.png)
